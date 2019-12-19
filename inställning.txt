@@ -1,0 +1,5 @@
+Månadskostnad:(<12 kkr)
+Hyra:(<6 kkr)
+Kvadratmeterpris:(<20 kkr)
+Boendeyta:(>15 kvm)
+

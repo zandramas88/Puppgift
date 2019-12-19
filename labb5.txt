@@ -1,0 +1,114 @@
+class TV():
+     def __init__(self,namn,kanal,volym, mv=10):#klassen skapas med attributen namn, kanal, volym och maxvolym
+          self.kanal = kanal
+          self.volym = volym
+          self.max_volym = mv
+          self.namn = namn
+          
+     def byt_kanal(self,ny_kanal): #metod för att byta kanal
+         self.kanal = ny_kanal
+
+     def ändra_volym(self, steg):#metod för att ändra volym om den inte redan är på lägsta eller högsta volym
+          if 0<=self.volym+steg<=self.max_volym:
+               self.volym += steg
+               return True
+          return False
+          
+             
+     def sänk_volym(self, v=1):#metod för att sänka volymen
+          return self.ändra_volym(-1*v)
+         
+     def höj_volym(self, v=1):#metod för att höja volymen
+          return self.ändra_volym(v)
+
+     def __str__(self):#metod för att skriva ut den aktuella TVn och dess konfigurationer
+          return "\n"+self.namn+" \nKanal: "+str(self.kanal)+"\nVolym: "+str(self.volym)+"\n"
+        
+
+def meny(TV_lista):#funktion för startmenyn
+     vilken_TV=0
+     while True:
+          skriv_listan(TV_lista)
+          print(len(TV_lista)+1,". Avsluta\n")
+          try:#felhantering för input
+               vilken_TV = int(input("Vilken TV vill du konfigurera?"))-1
+          except ValueError:
+               vilken_TV=len(TV_lista)+2
+          if 0<=vilken_TV<len(TV_lista):
+               TV_konfig(TV_lista[vilken_TV], TV_lista)
+          elif vilken_TV==len(TV_lista): #sparar de nya inställningarna om "avsluta" väljs
+               spara_fil(TV_lista)
+               exit()
+          else:
+               print("Vänligen välj ett av de ovanståedne alternativen!")
+
+
+def skriv_listan(TV_lista): #funktion som avnänds i meny() för att skriva ut alla möjliga TVs
+     i = 1
+     print()
+     for TV in TV_lista:
+          print(i, ".", TV.namn)
+          i+=1
+
+def TV_konfig(vilken_TV, TV_lista): #funktion för att justera en tv efter den har valts
+    while True:
+         print(vilken_TV.__str__())
+         try:#felhantering för inputen
+              TV_instruktion = int(input("1. Byt kanal \n2. Sänk ljudvolym \n3. Höj ljudvolym \n4. Gå till Huvudmenyn \nVälj: "))
+              
+         except ValueError:
+              TV_instruktion=5
+
+         if TV_instruktion == 1:
+              byt_kanal(TV_lista, vilken_TV) 
+              
+         elif TV_instruktion == 2:
+              vilken_TV.sänk_volym()
+              
+         elif TV_instruktion == 3:
+              vilken_TV.höj_volym()         
+
+         elif TV_instruktion == 4:
+              meny(TV_lista)
+
+         else:
+              print("Vänligen välj ett av de ovanståedne alternativen!\n")
+         
+                    
+def byt_kanal(TV_lista, vilken_TV): #funktion som anropas i TV_konfig() när man ska byta kanal
+     while True:
+          try: #Felhantering
+               ny_kanal = int(input("Ange vilken kanal du vill byta till \n : "))
+          except ValueError:
+               print("Vänligen välj en kanal mellan 1-99:")
+          if ny_kanal in range(1,100):
+               vilken_TV.byt_kanal(ny_kanal)
+               break
+          else:
+               print("Vänligen välj en kanal mellan 1-99:")
+
+def läs_fil():#öppnar textfilen med alla TVs och lägger dem i en TV_lista
+        f = open("TV.txt", "r")
+        allt = f.readlines()
+        TV_lista = []
+
+        for rad in allt:
+                namn,kanal,volym = rad.split(",",3)
+                T= TV(namn, int(kanal), int(volym))
+                TV_lista.append(T)
+        return TV_lista
+        f.close()
+
+def spara_fil(TV_lista): #öppnar textfilen och ändrar innehållet till den uppdaterade TV_lista
+        f=open("TV.txt", "w")
+        for TV in TV_lista:
+            namn=TV.namn
+            kanal=TV.kanal
+            volym=TV.volym
+            f.write(namn+", "+str(kanal)+", "+str(volym)+"\n")
+        f.close()
+
+
+
+
+

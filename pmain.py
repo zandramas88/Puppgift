@@ -1,10 +1,11 @@
-from pclass import
+from pclass import*
 
 def Startup_Settings():
         Bankränta = int(input("Vänligen ange den aktuella bankräntan (%):"))
         Kontantinsats = int(input("Vänligen ange din kontantinsats (kr):"))
         Ränteavdrag = int(input("Vänligen ange det aktuella ränteavdraget (%):"))
-        return Bankränta, Kontantinsats, Ränteavdrag
+        
+        return Bankränta, Kontantinsats, Ränteavdrag #bör beräkningarna göras här direkt?
 
 def läs_filB():#öppnar textfilen med alla Bostäder och lägger dem i Bostad_lista
         f = open("pbostad.txt", "r")
@@ -24,7 +25,7 @@ def läs_filU(): #öppnar fillen med urvals inställningarna
     Urvals_lista = []
 
     for rad in allt:
-        pMånadskostnad,pHyra,pKvadrameterpris,pBoendeyta = rad.split(",",4)
+        uMånadskostnad,uHyra,uKvmpris,uBoendeyta = rad.split(",",4)
         U = Urval(int(pMånadskostnad),int(pHyra),int(pKvadrameterpris),int(pBoendeyta))
         Urvals_lista.append(U)
     return Urvals_lista
@@ -33,11 +34,11 @@ def läs_filU(): #öppnar fillen med urvals inställningarna
 def spara_filU(Urvals_lista): #öppnar textfilen och ändrar innehållet till den uppdaterade Urvals_lista (Behövs det äns? Urvalet behöver ju inte sparas mellan körningar...)
         f=open("purval.txt", "w")
         for Urval in Urvals_lista:
-            pMånadskostnad = Urval.pMånadskostnad
-            pHyra = Urval.pHyra
-            pKvadratmeterpris = Urval.pKvadratmeterpris
-            pBoendeyta = Urval.pBoendeyta
-            f.write(str(pMånadskostnad)+", "+str(pHyra)+", "+str(pKvadratmeterpris)+", "+str(pBoendeyta)+"\n")
+            uMånadskostnad = Urval.uMånadskostnad
+            uHyra = Urval.uHyra
+            uKvmpris = Urval.uKvmpris
+            uBoendeyta = Urval.uBoendeyta
+            f.write(str(uMånadskostnad)+", "+str(uHyra)+", "+str(uKvmpris)+", "+str(uBoendeyta)+"\n")
         f.close()
 
 def Grundmeny():
@@ -48,16 +49,16 @@ def Grundmeny():
                         Justera_Parameter = 7
 
                 if Justera_Parameter == 1:
-                        ändra_pMånadskostnaden()
+                        ändra_uMånadskostnaden()
 
                 elif Justera_Parameter == 2:
-                        ändra_pHyra()
+                        ändra_uHyra()
 
                 elif Justera_Parameter == 3:
-                        ändra_pKvadratmeterpris()
+                        ändra_uKvmpris()
 
                 elif Justera_Parameter == 4:
-                        ändra_pBoendeyta()
+                        ändra_uBoendeyta()
 
                 elif Justera_Parameter == 5:
                         #skapa Urval
@@ -68,58 +69,58 @@ def Grundmeny():
                 else:
                         print("Vänligen välj något av de ovanstående alternativen!\n")
 
-def ändra_pMånadskostnaden():
+def ändra_uMånadskostnaden():
         while True:
                 try:
-                        ny_pMånadskostnad = int(input("Månadskostnaden ska högst vara (kkr): "))
+                        ny_uMånadskostnad = int(input("Månadskostnaden ska högst vara (kkr): "))
 
                 except ValueError:
                         print("Vänligen skriv in en siffra!")
 
-                if ny_pMånadskostnad => 0:
-                        Urval.ändra_pMånadskostnad(ny_pMånadskostnad)
+                if ny_uMånadskostnad >= 0:
+                        Urval.ändra_uMånadskostnad(ny_uMånadskostnad)
                         break
                 else:
                         print("Vänligen skriv in ett tal större än 0!")
 
-def ändra_pHyra():
+def ändra_uHyra():
         while True:
                 try:
-                        ny_pHyra = int(input("Hyran ska högst vara (kkr): "))
+                        ny_uHyra = int(input("Hyran ska högst vara (kkr): "))
                         
                 except ValueError:
                         print("Vänligen skriv in en siffra!")
 
-                if ny_pHyra => 0:
-                        Urval.ändra_pHyra(ny_pHyra)
+                if ny_uHyra >= 0:
+                        Urval.ändra_uHyra(ny_uHyra)
                         break
                 else:
                         print("Vänligen skriv in ett tal större än 0!")
 
-def ändra_pKvadratmeterpris():
+def ändra_uKvmpris():
         while True:
                 try:
-                        ny_pKvadratmeterpris = int(input("Kvadratmeterpriset ska högst vara (kkr): "))
+                        ny_uKvmpris = int(input("Kvadratmeterpriset ska högst vara (kkr): "))
                         
                 except ValueError:
                         print("Vänligen skriv in en siffra!")
 
-                if ny_pKvadratmeterpris => 0:
-                        Urval.ändra_pKvadratmeterpris(ny_pKvadratmeterpris)
+                if ny_uKvmpris >= 0:
+                        Urval.ändra_uKvmpris(ny_uKvmpris)
                         break
                 else:
                         print("Vänligen skriv in ett tal större än 0!")
 
-def ändra_pBoendeyta():
+def ändra_uBoendeyta():
         while True:
                 try:
-                        ny_pBoendeyta = int(input("Boendeytan ska minst vara (kvm): "))
+                        ny_uBoendeyta = int(input("Boendeytan ska minst vara (kvm): "))
                         
                 except ValueError:
                         print("Vänligen skriv in en siffra!")
 
-                if ny_pKvadratmeterpris => 0:
-                        Urval.ändra_pBoendeyta(ny_pBoendeyta)
+                if ny_uBoendeyta >= 0:
+                        Urval.ändra_uBoendeyta(ny_uBoendeyta)
                         break
                 else:
                         print("Vänligen skriv in ett tal större än 0!")

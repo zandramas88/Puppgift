@@ -8,7 +8,7 @@ class Bostad():
          self.Månadskostnad = Månadskostnad
          self.Ytkostnad = Ytkostnad
 
-      def __str__(self):#metod för att skriva ut den aktuella TVn och dess konfigurationer
+      def __str__(self):#metod för att skriva ut en viss Bostad och dess stats
           return "\n"+self.Boyta+" \nPris: "+str(self.Pris)+"\nHyra: "+str(self.Hyra)+"\nTelNr: "+self.Gatuadress+"\nMånadskostnad: "+str(self.Månadskostnad)+"\nYtkostnad: "+str(self.Ytkostnad)+"\n"
 
       def Bestäm_Månadskostnaden(self, Hyra, Pris, Kontantinsats, Ränta, Ränteavdrag):
@@ -19,20 +19,20 @@ class Bostad():
 
 
 class Urval():
-      def __init__(self,pMånadskostnad,pHyra,pKvadratmeterpris,pBoendeyta):#klassen skapas med attributen (p=parameter)
-            self.pMånadskostnad = pMånadskostnad
-            self.pHyra = pHyra
-            self.pKvadratmeterpris = pKvadratmeterpris
-            self.pBoendeyta = pBoendeyta
+      def __init__(self,uMånadskostnad,uHyra,uKvmpris,uBoendeyta):#klassen skapas med attributen (u=urval)
+            self.uMånadskostnad = uMånadskostnad
+            self.uHyra = uHyra
+            self.uKvmpris = uKvmpris
+            self.uBoendeyta = uBoendeyta
 
-      def ändra_pMånadskostnad(self, ny_pMånadskostnad):
-            self.pMånadskostnad = ny_pMånadskostnad
+      def ändra_uMånadskostnad(self, ny_uMånadskostnad):
+            self.uMånadskostnad = ny_uMånadskostnad
 
-      def ändra_pHyra(self, ny_pHyra):
-            self.pHyra = ny_pHyra
+      def ändra_uHyra(self, ny_uHyra):
+            self.uHyra = ny_uHyra
 
-      def ändra_pKvadrameterpris(self, ny_pKvadrameterpris):
-            self.pKvadrameterpris = ny_pKvadratmeterpris
+      def ändra_uKvmpris(self, ny_uKvmpris):
+            self.uKvmpris = ny_uKvmpris
 
-      def ändra_pBoendeyta(self, ny_pBoendeyta):
-            self.pBoendeyta = ny_pBoendeyta
+      def ändra_uBoendeyta(self, ny_uBoendeyta):
+            self.uBoendeyta = ny_uBoendeyta

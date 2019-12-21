@@ -1,12 +1,12 @@
 class Bostad():
       def __init__(self,Boyta,Pris,Hyra,TelNr,Gatuadress,Månadskostnad,Ytkostnad):#klassen skapas med attributen 
-         self.Boyta = Boyta
-         self.Pris = Pris
-         self.Hyra = Hyra
-         self.TelNr = TelNr
-         self.Gatuadress = Gatuadress
-         self.Månadskostnad = Månadskostnad
-         self.Ytkostnad = Ytkostnad
+         self.Boyta = float(Boyta)
+         self.Pris = int(Pris)
+         self.Hyra = int(Hyra)
+         self.TelNr = str(TelNr)
+         self.Gatuadress = str(Gatuadress)
+         self.Månadskostnad = float(Månadskostnad)
+         self.Ytkostnad = float(Ytkostnad)
 
       def __str__(self):#metod för att skriva ut en viss Bostad och dess stats
           return "\n"+self.Boyta+" \nPris: "+str(self.Pris)+"\nHyra: "+str(self.Hyra)+"\nTelNr: "+self.Gatuadress+"\nMånadskostnad: "+str(self.Månadskostnad)+"\nYtkostnad: "+str(self.Ytkostnad)+"\n"

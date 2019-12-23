@@ -1,38 +1,42 @@
-class Bostad():
-      def __init__(self,Boyta,Pris,Hyra,TelNr,Gatuadress,Månadskostnad,Ytkostnad):#klassen skapas med attributen 
-         self.Boyta = float(Boyta)
-         self.Pris = int(Pris)
-         self.Hyra = int(Hyra)
-         self.TelNr = str(TelNr)
-         self.Gatuadress = str(Gatuadress)
-         self.Månadskostnad = float(Månadskostnad)
-         self.Ytkostnad = float(Ytkostnad)
+class Bostad:
 
-      def __str__(self):#metod för att skriva ut en viss Bostad och dess stats
-          return "\n"+self.Boyta+" \nPris: "+str(self.Pris)+"\nHyra: "+str(self.Hyra)+"\nTelNr: "+self.Gatuadress+"\nMånadskostnad: "+str(self.Månadskostnad)+"\nYtkostnad: "+str(self.Ytkostnad)+"\n"
+    def __init__(self, pris, yta, hyra, tfn, adress, månadskostnad, ytkostnad):
+        self.pris = int(pris)
+        self.yta = float(yta)                       # ska kunna vara decimaltal
+        self.hyra = int(hyra)
+        self.tfn = str(tfn)
+        self.adress = str(adress)
+        self.månadskostnad = float(månadskostnad)   # avrundas vid beräkning till en decimal
+        self.ytkostnad = float(ytkostnad)           # avrundas vid beräkning till en decimal
 
-      def Bestäm_Månadskostnaden(self, Hyra, Pris, Kontantinsats, Ränta, Ränteavdrag):
-          self.Månadskostnaden = Hyra + ((Pris-Kontantinsats)*(Ränta/100)*(1-Ränteavdrag/100))/12
+    # metod för att printa bostäderna, "" utgör tomrum
+    def __repr__(self):
+        return "\nBoyta:{0:<14s}".format("") + str(self.yta) + " kvm\nPris:{0:>15s}".format("") + str(self.pris) + \
+               " kr\nHyra:{0:>15s}".format("") + str(self.hyra) + "kr\nTelNr:{0:>14s}".format("") + str(self.tfn) + \
+               "\nGatuadress:{0:>9s}".format("") + str(self.adress) + "\nMånadskostnad:{0:>6s}".format("") + \
+               str(self.månadskostnad) + "kr\nKvadratmeterpris:{0:>3s}".format("") + str(self.ytkostnad) + "kr/kvm"
 
-      def Bestäm_Ytkostnaden(self, Boyta, Pris):
-          self.Ytkostnaden = Boyta/Pris
+class Urval:
 
+    def __init__(self, uMånadskostnad, uHyra, uKvmpris, uYta):   #u = urval, dvs uHyra = urvalshyra osv.
+        self.uMånadskostnad = int(uMånadskostnad)
+        self.uHyra = int(uHyra)
+        self.uKvmpris = int(uKvmpris)
+        self.uYta = int(uYta)
 
-class Urval():
-      def __init__(self,uMånadskostnad,uHyra,uKvmpris,uBoendeyta):#klassen skapas med attributen (u=urval)
-            self.uMånadskostnad = uMånadskostnad
-            self.uHyra = uHyra
-            self.uKvmpris = uKvmpris
-            self.uBoendeyta = uBoendeyta
+    def justera_uMk (self, nyuMånadskostnad):    # metod för att ändra maximala månadskostnaden i urvalet
+        self.uMånadskostnad = nyuMånadskostnad
 
-      def ändra_uMånadskostnad(self, ny_uMånadskostnad):
-            self.uMånadskostnad = ny_uMånadskostnad
+    def justera_uH (self, nyuHyra):              # metod för att ändra maximala hyran i urvalet
+        self.uHyra = nyuHyra
 
-      def ändra_uHyra(self, ny_uHyra):
-            self.uHyra = ny_uHyra
+    def justera_uKvmp (self, nyuKvmpris):        # metod för att ändra maximala kvadratmeterpriset i urvalet
+        self.uKvmpris = nyuKvmpris
 
-      def ändra_uKvmpris(self, ny_uKvmpris):
-            self.uKvmpris = ny_uKvmpris
+    def justera_uY (self, nyuYta):               # metod för att ändra minsta boendeytan i urvalet
+        self.uYta = nyuYta
 
-      def ändra_uBoendeyta(self, ny_uBoendeyta):
-            self.uBoendeyta = ny_uBoendeyta
+    def __repr__(self): # metod som printar Grundmenyn
+        return "\nDina valmöjligheter: \n1) Ändra önskad Månadskostnad (< " + str(self.uMånadskostnad) + " kkr)\n2) Ändra önskad Hyra (< " +\
+               str(self.uHyra) + " kkr) \n3) Ändra önskat Kvadratmeterpris (< " + str(self.uKvmpris) + " kkr/kvm) \n4) Ändra önskad Boendeyta " \
+                 "(> " + str(self.uYta) + " kvm)\n5) Skapa Urval \n6) Avsluta"

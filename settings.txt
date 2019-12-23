@@ -1,0 +1,2 @@
+% Format: Månadskostnad,Hyra,Kvadratmeterpris,Boendeyta
+12,6,20,15

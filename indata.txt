@@ -1,9 +1,9 @@
 % Format: Pris / Bostadsyta / Hyra / TelNr / Gatuadress
-450000
-45.5
-1250
-08 - 621 33 01
-Brickebacken 1
+750000
+70.5
+1650
+08 - 621 33 04
+Brickebacken 4
 550000
 55.5
 1350
@@ -14,8 +14,8 @@ Brickebacken 2
 1450
 08 - 621 33 03
 Brickebacken 3
-750000
-70.5
-1650
-08 - 621 33 04
-Brickebacken 4
+450000
+45.5
+1250
+08 - 621 33 01
+Brickebacken 1

@@ -2,7 +2,7 @@ class Bostad:
 
     def __init__(self, pris, yta, hyra, tfn, adress, månadskostnad, ytkostnad):
         self.pris = int(pris)
-        self.yta = float(yta)                       # ska kunna vara decimaltal
+        self.yta = float(yta)
         self.hyra = int(hyra)
         self.tfn = str(tfn)
         self.adress = str(adress)
@@ -10,7 +10,7 @@ class Bostad:
         self.ytkostnad = float(ytkostnad)           # avrundas vid beräkning till en decimal
 
     # metod för att printa bostäderna, "" utgör tomrum
-    def __repr__(self):
+    def __str__(self):
         return "\nBoyta:{0:<14s}".format("") + str(self.yta) + " kvm\nPris:{0:>15s}".format("") + str(self.pris) + \
                " kr\nHyra:{0:>15s}".format("") + str(self.hyra) + "kr\nTelNr:{0:>14s}".format("") + str(self.tfn) + \
                "\nGatuadress:{0:>9s}".format("") + str(self.adress) + "\nMånadskostnad:{0:>6s}".format("") + \
@@ -18,7 +18,7 @@ class Bostad:
 
 class Urval:
 
-    def __init__(self, uMånadskostnad, uHyra, uKvmpris, uYta):   #u = urval, dvs uHyra = urvalshyra osv.
+    def __init__(self, uMånadskostnad, uHyra, uKvmpris, uYta):   # u = urval, dvs uHyra = urvalshyra osv.
         self.uMånadskostnad = int(uMånadskostnad)
         self.uHyra = int(uHyra)
         self.uKvmpris = int(uKvmpris)
@@ -36,7 +36,7 @@ class Urval:
     def justera_uY (self, nyuYta):               # metod för att ändra minsta boendeytan i urvalet
         self.uYta = nyuYta
 
-    def __repr__(self): # metod som printar Grundmenyn
+    def __str__(self): # metod som printar Grundmenyn
         return "\nDina valmöjligheter: \n1) Ändra önskad Månadskostnad (< " + str(self.uMånadskostnad) + " kkr)\n2) Ändra önskad Hyra (< " +\
                str(self.uHyra) + " kkr) \n3) Ändra önskat Kvadratmeterpris (< " + str(self.uKvmpris) + " kkr/kvm) \n4) Ändra önskad Boendeyta " \
                  "(> " + str(self.uYta) + " kvm)\n5) Skapa Urval \n6) Avsluta"

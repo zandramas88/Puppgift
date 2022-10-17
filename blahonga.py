@@ -1,21 +1,20 @@
-import numpy as np
 from scipy.linalg import eigh
 import matplotlib.pyplot as plt
 
 
 # Define the operators (normalised prefactors)
-SI = np.eye(3, dtype=np.complex)
+SI = np.eye(3, dtype=np.complex128)
 SX = (np.sqrt(1/2) *
-      np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]], dtype=np.complex))
+      np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]], dtype=np.complex128))
 SY = (-1j * np.sqrt(1/2) *
-      np.array([[0, 1, 0], [-1, 0, 1], [0, -1, 0]], dtype=np.complex))
+      np.array([[0, 1, 0], [-1, 0, 1], [0, -1, 0]], dtype=np.complex128))
 SZ = (np.sqrt(1/2) *
-      np.array([[1, 0, 0], [0, 0, 0], [0, 0, -1]], dtype=np.complex))
+      np.array([[1, 0, 0], [0, 0, 0], [0, 0, -1]], dtype=np.complex128))
 
 def tensor(op_list):
     """Finds tensor product of a list of operators."""
     # Initialise product as a 1x1 I matrix
-    product = np.eye(1, dtype=np.complex)
+    product = np.eye(1, dtype=np.complex128)
     for op in op_list:
         product = np.kron(product, op)
     return product
@@ -65,7 +64,7 @@ def aklt(n, closed=True, costheta=1., sintheta=1./3):
         s_dot_s += np.dot(sy_list[a], sy_list[b])
         s_dot_s += np.dot(sz_list[a], sz_list[b])
 
-        h += 1/2 * s_dot_s + 1/6 * np.dot(s_dot_s, s_dot_s) + 1/3
+        h += 1./2 * s_dot_s + 1./6 * np.dot(s_dot_s, s_dot_s) + 1./3 * np.eye(9)
     return np.linalg.eigvalsh(h)
 
 
@@ -84,8 +83,8 @@ def open_vs_closed():
     # Plot energy spectra
     fig, ax = plt.subplots()
 
-    ax.plot(aklt_closed[0:80], 'ks--', label='Closed')
-    ax.plot(aklt_open[0:80], 'ko:', mfc='white', label='Open')
+    ax.plot(aklt_closed[0:10], 'ks--', label='Closed')
+    ax.plot(aklt_open[0:10], 'ko:', mfc='white', label='Open')
 
     ax.set_ylabel("Energy")
     ax.set_xlabel("Level Index")
